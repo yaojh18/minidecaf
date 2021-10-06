@@ -30,7 +30,7 @@ class CFGBuilder:
                 if not item.isSequential():
                     if item.kind is InstrKind.JMP:
                         kind = BlockKind.END_BY_JUMP
-                    elif item.kind is InstrKind.COND_JMP:
+                    elif item.kind is InstrKind.BEQ:
                         kind = BlockKind.END_BY_COND_JUMP
                     elif item.kind is InstrKind.RET:
                         kind = BlockKind.END_BY_RETURN

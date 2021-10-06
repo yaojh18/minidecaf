@@ -37,12 +37,15 @@ class BruteRegAlloc(RegAlloc):
 
     def accept(self, graph: CFG, info: SubroutineInfo) -> None:
         subEmitter = self.emitter.emitSubroutine(info)
+        lastKind = None
         for bb in graph.iterator():
             # you need to think more here
             # maybe we don't need to alloc regs for all the basic blocks
             if bb.label is not None:
                 subEmitter.emitLabel(bb.label)
-            self.localAlloc(bb, subEmitter)
+            if not (lastKind == BlockKind.END_BY_RETURN and bb.kind == BlockKind.END_BY_RETURN):
+                self.localAlloc(bb, subEmitter)
+            lastKind = bb.kind
         subEmitter.emitEnd()
 
     def bind(self, temp: Temp, reg: Reg):

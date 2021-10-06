@@ -11,7 +11,8 @@ class InstrKind(Enum):
     # Branching instructions.
     JMP = auto()
     # Branching with conditions.
-    COND_JMP = auto()
+    BEQ = auto()
+    BNE = auto()
     # Return instruction.
     RET = auto()
 

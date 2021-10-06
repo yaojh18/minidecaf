@@ -6,7 +6,7 @@ from utils.tac.holeinstr import HoleInstr
 from utils.tac.nativeinstr import NativeInstr
 from utils.tac.reg import Reg
 from utils.tac.tacinstr import TACInstr
-from utils.tac.tacop import BinaryOp, InstrKind, UnaryOp
+from utils.tac.tacop import BinaryOp, InstrKind, UnaryOp, CondBranchOp
 from utils.tac.temp import Temp
 
 WORD_SIZE: Final[int] = 4  # in bytes
@@ -122,12 +122,13 @@ class Riscv:
             )
     
     class Branch(TACInstr):
-        def __init__(self, cond: Temp, target: Label) -> None:
-            super().__init__(InstrKind.COND_JMP, [], [cond], target)
+        def __init__(self, op: CondBranchOp, cond: Temp, target: Label) -> None:
+            super().__init__(InstrKind.BNE if op == CondBranchOp.BNE else InstrKind.BEQ, [], [cond], target)
             self.target = target
+            self.op = op.__str__()[13:].lower()
         
         def __str__(self) -> str:
-            return "beq " + Riscv.FMT3.format(str(Riscv.ZERO), str(self.srcs[0]), str(self.target))
+            return self.op + " " + Riscv.FMT3.format(str(Riscv.ZERO), str(self.srcs[0]), str(self.target))
 
     class Jump(TACInstr):
         def __init__(self, target: Label) -> None:

@@ -62,27 +62,28 @@ def step_asm(p: TACProg):
     prog = asm.transform(p)
     return prog
 
-
 def main():
     args = parseArgs()
+    # args.input = './minidecaf-tests/testcases/step1/multi_digit.c'
+    # args.riscv = True
 
     def _parse():
         r = step_parse(args)
-        #print("\nParsed AST:\n")
-        #printer = TreePrinter(indentLen=2)
-        #printer.work(r)
+        # print("\nParsed AST:\n")
+        # printer = TreePrinter(indentLen=2)
+        # printer.work(r)
         return r
 
     def _tac():
         tac = step_tac(_parse())
-        #print("\nGenerated TAC:\n")
-        #tac.printTo()
+        # print("\nGenerated TAC:\n")
+        # tac.printTo()
         return tac
 
     def _asm():
         asm = step_asm(_tac())
-        #print("\nGenerated ASM:\n")
-        #print(asm)
+        # print("\nGenerated ASM:\n")
+        # print(asm)
         return asm
 
     if args.riscv:

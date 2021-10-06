@@ -147,7 +147,7 @@ class Branch(TACInstr):
 # Branching with conditions.
 class CondBranch(TACInstr):
     def __init__(self, op: CondBranchOp, cond: Temp, target: Label) -> None:
-        super().__init__(InstrKind.COND_JMP, [], [cond], target)
+        super().__init__(InstrKind.BEQ, [], [cond], target)
         self.op = op
         self.cond = cond
         self.target = target

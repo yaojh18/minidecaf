@@ -163,23 +163,23 @@ class TACGen(Visitor[FuncVisitor, None]):
 
         if expr.op == node.BinaryOp.LogicOr:
             newReg = mv.visitBinary(tacop.BinaryOp.OR, expr.lhs.getattr("val"), expr.rhs.getattr("val"))
-            expr.setattr("val", mv.visitUnary(tacop.UnaryOp.SNEZ, newReg))
+            expr.setattr("val", mv.visitUnarySelf(tacop.UnaryOp.SNEZ, newReg))
         elif expr.op == node.BinaryOp.LogicAnd:
             newReg1 = mv.visitUnary(tacop.UnaryOp.SNEZ, expr.lhs.getattr("val"))
             newReg2 = mv.visitUnary(tacop.UnaryOp.SNEZ, expr.rhs.getattr("val"))
-            expr.setattr("val", mv.visitBinary(tacop.BinaryOp.AND, newReg1, newReg2))
+            expr.setattr("val", mv.visitBinarySelf(tacop.BinaryOp.AND, newReg1, newReg2))
         elif expr.op == node.BinaryOp.LE:
             newReg = mv.visitBinary(tacop.BinaryOp.SGT, expr.lhs.getattr("val"), expr.rhs.getattr("val"))
-            expr.setattr("val", mv.visitUnary(tacop.UnaryOp.SEQZ, newReg))
+            expr.setattr("val", mv.visitUnarySelf(tacop.UnaryOp.SEQZ, newReg))
         elif expr.op == node.BinaryOp.GE:
             newReg = mv.visitBinary(tacop.BinaryOp.SLT, expr.lhs.getattr("val"), expr.rhs.getattr("val"))
-            expr.setattr("val", mv.visitUnary(tacop.UnaryOp.SEQZ, newReg))
+            expr.setattr("val", mv.visitUnarySelf(tacop.UnaryOp.SEQZ, newReg))
         elif expr.op == node.BinaryOp.EQ:
             newReg = mv.visitBinary(tacop.BinaryOp.SUB, expr.lhs.getattr("val"), expr.rhs.getattr("val"))
-            expr.setattr("val", mv.visitUnary(tacop.UnaryOp.SEQZ, newReg))
+            expr.setattr("val", mv.visitUnarySelf(tacop.UnaryOp.SEQZ, newReg))
         elif expr.op == node.BinaryOp.NE:
             newReg = mv.visitBinary(tacop.BinaryOp.SUB, expr.lhs.getattr("val"), expr.rhs.getattr("val"))
-            expr.setattr("val", mv.visitUnary(tacop.UnaryOp.SNEZ, newReg))
+            expr.setattr("val", mv.visitUnarySelf(tacop.UnaryOp.SNEZ, newReg))
         else:
             op = {
                 node.BinaryOp.Add: tacop.BinaryOp.ADD,

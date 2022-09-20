@@ -1,44 +1,45 @@
-# MiniDecaf Python 框架
+# MiniDecaf Python Framework
+This is a compiler developed in Python. It compiles a new language MiniDecaf, a subset of C language into assamble language of RISC-V.
 
-## 依赖
+## dependencies
 
 - **Python >= 3.9**
-- requirements.txt 里的 python 库，包括 ply 和 argparse。
-- RISC-V 运行环境（参见实验指导书）
+- python libraries in requirements.txt, including ply and argparse.
+- RISC-V operating environment (see lab guide)
 
-## 运行
+## run
 
-```
+````
 python3 main.py --input <testcase.c> [--riscv/--tac/--parse]
-```
+````
 
-各参数意义如下：
+The meaning of each parameter is as follows:
 
-| 参数 | 含义 |
+| Parameters | Meaning |
 | --- | --- |
-| `input` | 输入的 Minidecaf 代码位置 |
-| `riscv` | 输出 RISC-V 汇编 |
-| `tac` | 输出三地址码 |
-| `parse` | 输出抽象语法树 |
+| `input` | Minidecaf code location for input |
+| `riscv` | output RISC-V assembly |
+| `tac` | output three-address code |
+| `parse` | output abstract syntax tree |
 
-## 代码结构
+## code structure
 
-```
+````
 minidecaf/
-    frontend/       前端（与中端）
-        ast/        语法树定义
-        lexer/      词法分析
-        parser/     语法分析
-        type/       类型定义
-        symbol/     符号定义
-        scope/      作用域定义
-        typecheck/  语义分析（符号表构建、类型检查）
-        tacgen/     中间代码 TAC 生成
-    backend/        后端
-        dataflow/   数据流分析
-        reg/        寄存器分配
-        riscv/      RISC-V 平台相关
-    utils/          底层类
-        label/      标签定义
-        tac/        TAC 定义和基本类
-```
+    frontend/ front end (and middle end)
+        ast/ syntax tree definition
+        lexer/ lexical analysis
+        parser/ parsing
+        type/ type definition
+        symbol/ symbol definition
+        scope/ scope definition
+        typecheck/ semantic analysis (symbol table construction, type checking)
+        tacgen/ intermediate code TAC generation
+    backend/ backend
+        dataflow/ data flow analysis
+        reg/register allocation
+        riscv/ RISC-V platform related
+    utils/ low-level classes
+        label/ label definition
+        tac/TAC definitions and base classes
+````
